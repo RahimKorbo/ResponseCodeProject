@@ -39,9 +39,13 @@ export default class Homepage extends Component {
         e.preventDefault();
         if (this.validateForm()) {
             let fields = this.state.fields;
-
+            
             if (!fields["responseCode"]) {
                 fields["responseCode"] = "";
+
+            }
+            if (!fields["DE"]) {
+                fields["DE"] = "";
 
             }
 
@@ -60,13 +64,19 @@ export default class Homepage extends Component {
 
         //alert("UserName:::"+fields.username);
         //alert("Password:::"+fields.password);
-
+        
 
         if (!fields["responseCode"]) {
             formIsValid = false;
             alert("Kindly Enter Response Code!");
             //errors["username"] = "*Please enter your username.";
         }
+         if (!fields["DE"]) {
+             formIsValid = false;
+             alert("Kindly Choose DE!");
+             this.state.fields.DE = "DE-39";
+             //errors["username"] = "*Please enter your username.";
+         }
 
         // if (typeof fields["username"] !== "undefined") {
         //   if (!fields["username"].match(/^[a-zA-Z ]*$/)) {
@@ -88,7 +98,8 @@ export default class Homepage extends Component {
 
     authenticate = () => {
         const authJson = {
-            responseCode: this.state.fields.responseCode
+            responseCode: this.state.fields.responseCode,
+            DE:this.state.fields.DE
         };
 
         console.log(authJson)
@@ -103,7 +114,7 @@ export default class Homepage extends Component {
                 // localStorage.setItem("token",response.data.jwttoken);
                 // localStorage.setItem("logintime",response.data.loginTime);
 
-                this.setState({ navigate: true,loading:true });
+                this.setState({ navigate: true, loading: true });
             })
             .catch((err) => {
                 console.log(err);
@@ -122,55 +133,64 @@ export default class Homepage extends Component {
 
         return (
             <div className="prelogin-page">
-                                    <div className="login-heading">
-                                        <h3>Response Code Viewer</h3>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="ux-component">
-                                                <label htmlFor="responseCode">Enter Response Code</label>
-                                                <input
-                                                    id="responseCode"
-                                                    name="responseCode"
-                                                    type="text"
-                                                    onKeyUp={this.handleChange}
-                                                    required
-                                                    maxLength="2"
-                                                />
-                                            </div>
-                                            <div
-                                                style=
-                                                {{
-                                                    color: "red", textAlign: "left",
-                                                    display: "block",
-                                                    fontSize: "0.8rem"
-                                                }}
+                <div className="login-heading">
+                    <h3>Response Code Viewer</h3>
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        <div className="ux-component">
+                           
+                            <label htmlFor="responseCode">Choose DataElements:</label>
+                            <select id="DE" name="DE" onChange={this.handleChange}>
+                            <option value="--">-Data Element-</option>
+                                <option value="DE-39">DE-39</option>
+                                <option value="DE-40">DE-40</option>
+                                <option value="DE-48">DE-48</option>
+                                <option value="DE-61">DE-61</option>
+                            </select>
 
-                                            >{this.state.errors.username}</div>
-                                        </div>
+                            <input
+                                id="responseCode"
+                                name="responseCode"
+                                type="text"
+                                onKeyUp={this.handleChange}
+                                required
+                                maxLength="2"
+                            />
+                        </div>
+                        <div
+                            style=
+                            {{
+                                color: "red", textAlign: "left",
+                                display: "block",
+                                fontSize: "0.8rem"
+                            }}
 
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="form-footer">
-                                                <button
-                                                    role="button"
-                                                    className="button"
-                                                    //onClick={this.authenticate}
-                                                    onClick={this.submitForm}
-                                                >
-                                                    Submit
+                        >{this.state.errors.username}</div>
+                    </div>
+
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        <div className="form-footer">
+                            <button
+                                role="button"
+                                className="button"
+                                //onClick={this.authenticate}
+                                onClick={this.submitForm}
+                            >
+                                Submit
                                                 </button>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            {this.state.loading && <img src={loadingImg} />}
-                                            <p>{this.state.data}</p>
-                                        </div>
-                                    </div>
-                                    <div className="vspacer50"></div>
-                     
-                
+                        </div>
+                    </div>
+                    <div>
+                        {this.state.loading && <img src={loadingImg} />}
+                        <p>{this.state.data}</p>
+                    </div>
+                </div>
+                <div className="vspacer50"></div>
+
+
             </div>
         );
     }

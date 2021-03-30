@@ -44,8 +44,8 @@ export default class Homepage extends Component {
                 fields["responseCode"] = "";
 
             }
-            if (!fields["DE"]) {
-                fields["DE"] = "";
+            if (!fields["dE"]) {
+                fields["dE"] = "";
 
             }
 
@@ -71,10 +71,10 @@ export default class Homepage extends Component {
             alert("Kindly Enter Response Code!");
             //errors["username"] = "*Please enter your username.";
         }
-         if (!fields["DE"]) {
+         if (!fields["dE"]) {
              formIsValid = false;
              alert("Kindly Choose DE!");
-             this.state.fields.DE = "DE-39";
+             this.state.fields.dE = "DE-39";
              //errors["username"] = "*Please enter your username.";
          }
 
@@ -99,7 +99,7 @@ export default class Homepage extends Component {
     authenticate = () => {
         const authJson = {
             responseCode: this.state.fields.responseCode,
-            DE:this.state.fields.DE
+            dE:this.state.fields.dE
         };
 
         console.log(authJson)
@@ -109,7 +109,7 @@ export default class Homepage extends Component {
             url: getResponseMsg
         })
             .then((response) => {
-                alert("User Authentication Successful.")
+                alert("Backend Processing Successful.")
                 // localStorage.setItem("username",this.state.fields.username)
                 // localStorage.setItem("token",response.data.jwttoken);
                 // localStorage.setItem("logintime",response.data.loginTime);
@@ -141,7 +141,7 @@ export default class Homepage extends Component {
                         <div className="ux-component">
                            
                             <label htmlFor="responseCode">Choose DataElements:</label>
-                            <select id="DE" name="DE" onChange={this.handleChange}>
+                            <select id="dE" name="dE" onChange={this.handleChange}>
                             <option value="--">-Data Element-</option>
                                 <option value="DE-39">DE-39</option>
                                 <option value="DE-40">DE-40</option>

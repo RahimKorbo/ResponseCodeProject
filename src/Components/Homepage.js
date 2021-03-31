@@ -132,7 +132,9 @@ export default class Homepage extends Component {
 
     render() {
         const { navigate } = this.state;
-
+        const items = this.state.data.map((item) =>
+        <li>{item}</li>
+      );
         // here is the important part
         // if (navigate) {
         //   return <Redirect to="/dash" push={true} />;
@@ -192,7 +194,7 @@ export default class Homepage extends Component {
                     </div>
                     <div>
                         {this.state.loading && <img src={loadingImg} />}
-                        <p>{this.state.data}</p>
+                        <ul>{items}</ul>
                     </div>
                 </div>
                 <div className="vspacer50"></div>

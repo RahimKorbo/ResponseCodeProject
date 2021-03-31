@@ -1,6 +1,6 @@
-// const remoteApi = "http://localhost:8081/";
+ const remoteApi = "http://localhost:8081/";
 
-const remoteApi = "/";
+//const remoteApi = "/";
 
 export const version = "Version 1.0.0"
 

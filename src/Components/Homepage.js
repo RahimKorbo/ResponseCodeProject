@@ -13,6 +13,7 @@ export default class Homepage extends Component {
             // password: "",
             fields: {},
             errors: {},
+            data:"",
             loading: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -109,12 +110,18 @@ export default class Homepage extends Component {
             url: getResponseMsg
         })
             .then((response) => {
+                this.setState({ navigate: true, loading: true });
                 alert("Backend Processing Successful.")
                 // localStorage.setItem("username",this.state.fields.username)
                 // localStorage.setItem("token",response.data.jwttoken);
                 // localStorage.setItem("logintime",response.data.loginTime);
+                
+                if(response.status == "success") {
+                    this.setState({ navigate: true, loading: false });
+                    this.setState({ data: response.response  });
 
-                this.setState({ navigate: true, loading: true });
+                }
+                
             })
             .catch((err) => {
                 console.log(err);

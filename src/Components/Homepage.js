@@ -121,7 +121,10 @@ export default class Homepage extends Component {
                     this.setState({ data: response.response  });
 
                 }
-                
+                alert(this.state.data);
+      
+                console.log(this.state.data);
+
             })
             .catch((err) => {
                 console.log(err);

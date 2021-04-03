@@ -13,7 +13,7 @@ export default class Homepage extends Component {
             // password: "",
             fields: {},
             errors: {},
-            data:"",
+            data:[],
             loading: false
         };
         this.handleChange = this.handleChange.bind(this);

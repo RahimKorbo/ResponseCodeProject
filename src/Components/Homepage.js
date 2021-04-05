@@ -13,7 +13,8 @@ export default class Homepage extends Component {
             // password: "",
             fields: {},
             errors: {},
-            data:[],
+            listdata:[],
+            backendStatus:'',
             loading: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -116,15 +117,13 @@ export default class Homepage extends Component {
                 // localStorage.setItem("token",response.data.jwttoken);
                 // localStorage.setItem("logintime",response.data.loginTime);
                 
-                if(response.status == "success") {
+                if(response.status === 200) {
                     this.setState({ navigate: true, loading: false });
-                    this.setState({ data: response.response  });
+                    this.setState({ listdata: response.data.response,backendStatus:response.data.status  });
+                    console.log("Data---",response.data.response);
 
                 }
-                alert(this.state.data);
-      
-                console.log(this.state.data);
-
+                
             })
             .catch((err) => {
                 console.log(err);
@@ -134,10 +133,10 @@ export default class Homepage extends Component {
     };
 
     render() {
-        const { navigate } = this.state;
-        const items = this.state.data.map((item) =>
-        <li>{item}</li>
-      );
+         const { navigate } = this.state;
+         const items = this.state.listdata.map((item) =>
+         <li>{item}</li>
+       );
         // here is the important part
         // if (navigate) {
         //   return <Redirect to="/dash" push={true} />;
@@ -155,6 +154,8 @@ export default class Homepage extends Component {
                             <label htmlFor="responseCode">Choose DataElements:</label>
                             <select id="dE" name="dE" onChange={this.handleChange}>
                             <option value="--">-Data Element-</option>
+                                <option value="DE-39">DE-37</option>
+                                <option value="DE-39">DE-38</option>
                                 <option value="DE-39">DE-39</option>
                                 <option value="DE-40">DE-40</option>
                                 <option value="DE-48">DE-48</option>
@@ -167,7 +168,7 @@ export default class Homepage extends Component {
                                 type="text"
                                 onKeyUp={this.handleChange}
                                 required
-                                maxLength="2"
+                                
                             />
                         </div>
                         <div
@@ -197,7 +198,7 @@ export default class Homepage extends Component {
                     </div>
                     <div>
                         {this.state.loading && <img src={loadingImg} />}
-                        <ul>{items}</ul>
+                         <ul>{items}</ul> 
                     </div>
                 </div>
                 <div className="vspacer50"></div>

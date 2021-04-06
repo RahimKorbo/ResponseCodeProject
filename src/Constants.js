@@ -1,4 +1,4 @@
- const remoteApi = "http://localhost:8081/";
+ const remoteApi = "https://iso-data.herokuapp.com/";
 
 //const remoteApi = "/";
 

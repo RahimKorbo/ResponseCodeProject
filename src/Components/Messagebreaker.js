@@ -98,6 +98,9 @@ export default class Messagebreaker extends Component {
         };
 
         console.log(authJson)
+		console.log(getResponseMsgBreaker)
+		alert("Auth Json - "+authJson)
+		alert("Response URL -  "+getResponseMsgBreaker);
         Axios.request({
             method: "POST",
             data: authJson,
